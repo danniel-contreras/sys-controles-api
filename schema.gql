@@ -1,0 +1,167 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Usuario {
+  id_usuario: Int!
+  id_tipouser: Int
+  nombre: String
+  apellido: String
+  usuario: String
+  clave: String
+  fechacreacion: DateTime
+  activo: Boolean!
+  correo: String
+  usuario_movil: String!
+  id_dispositivo: String
+  recibir_notificaciones: String
+  claveApp: String
+  estadoClaveApp: Boolean
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  ok: Boolean!
+  message: String!
+  user: Usuario
+  accessToken: String
+}
+
+type UpdateClaveAppResponse {
+  ok: Boolean!
+  message: String!
+  user: Usuario
+}
+
+type GetOneUser {
+  ok: Boolean!
+  message: String!
+  user: Usuario
+}
+
+type UserType {
+  id_tipouser: Int!
+  descripcion: String!
+  estado: Boolean!
+}
+
+type TipoCombustible {
+  id_tipo_combustible: Int!
+  descripcion: String!
+}
+
+type GetTipoCombustible {
+  ok: Boolean!
+  message: String!
+  tipos: [TipoCombustible!]
+}
+
+type TipoVehiculo {
+  id_tipo_vehiculo: Int!
+  descripcion: String!
+  estado: Boolean!
+}
+
+type GetTiposVehiculo {
+  ok: Boolean!
+  message: String!
+  tipos: [TipoVehiculo!]
+}
+
+type Marca {
+  id_marca: Int!
+  nombre: String!
+  estado: Boolean!
+}
+
+type GetMarcas {
+  ok: Boolean!
+  message: String!
+  marcas: [Marca!]
+}
+
+type EmpresasTransporte {
+  id_emp_transporte: Int!
+  codigo_sap: String!
+  nombre: String!
+  contacto: String!
+  telefono: String!
+  estado: Boolean!
+}
+
+type GetEmpresasTransporte {
+  ok: Boolean!
+  message: String!
+  empresasTransporte: [EmpresasTransporte!]
+}
+
+type GetVehiculo {
+  ok: Boolean!
+  message: String!
+  vehiculos: [OnlyVehicle!]!
+}
+
+type OnlyVehicle {
+  id_vehiculo: Int!
+  id_emp_transporte: Int
+  id_marca: Int!
+  id_tipovehiculo: Int!
+  numero: Int!
+  annio: Int!
+  placa: String!
+  tonelaje: String
+  poliza_seguro: String
+  rendimiento: Float
+  valor_depreciacion: Float
+  id_tipo_combustible: Int!
+  estado: Boolean!
+  marca: Marca!
+  tipo_combustible: TipoCombustible!
+  tipo_vehiculo: TipoVehiculo!
+  empresa_transporte: EmpresasTransporte!
+}
+
+type Query {
+  users: [Usuario!]!
+  user(id: Int!): GetOneUser!
+  auth(body: Login!): LoginResponse!
+  usersType: [UserType!]!
+  userType(id: Int!): UserType!
+  obtenerTiposCombustible: GetTipoCombustible!
+  obtenerTiposVehiculo: GetTiposVehiculo!
+  obetenerMarcas: GetMarcas!
+  obtenerEmpresasTransporte: GetEmpresasTransporte!
+  obtenerVehiculos: GetVehiculo!
+}
+
+input Login {
+  username: String!
+  clave: String!
+}
+
+type Mutation {
+  updateClave(data: UpdateClaveApp!): UpdateClaveAppResponse!
+  createUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
+  updateUserType(updateUserTypeInput: UpdateUserTypeInput!): UserType!
+  removeUserType(id: Int!): UserType!
+}
+
+input UpdateClaveApp {
+  clave: String!
+  id: Int!
+}
+
+input CreateUserTypeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserTypeInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
